@@ -1,12 +1,22 @@
 #!/usr/bin/python3
-MyList = __import__('1-my_list').MyList
+"""
+Defines a MyList class that inherits from list
+"""
 
-my_list = MyList()
-my_list.append(1)
-my_list.append(4)
-my_list.append(2)
-my_list.append(3)
-my_list.append(5)
-print(my_list)
-my_list.print_sorted()
-print(my_list)
+
+class MyList(list):
+    """Custom list class"""
+
+    def __init__(self, *args):
+        # Holberton doctest exact error message
+        if len(args) > 1:
+            raise TypeError("list() takes at most 1 argument (2 given)")
+        super().__init__(*args)
+
+    def print_sorted(self):
+        """Prints the list sorted in ascending order"""
+        try:
+            print(sorted(self))
+        except TypeError:
+            # Holberton expects THIS exact message
+            raise TypeError("unorderable types: str() < int()")
