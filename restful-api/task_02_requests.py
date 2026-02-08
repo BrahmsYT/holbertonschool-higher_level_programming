@@ -1,57 +1,43 @@
 #!/usr/bin/python3
 """
-task_02_requests.py fetches all posts from JSONPlaceholder
-
-Attributes:
-    url (str): url of JSONPlaceholder
-    res (object): response from http request
-    json_data (object): response as json
+Docstring for restful-api.task_02_requests
 """
 import requests
 import csv
+import json
+
+URL = "https://jsonplaceholder.typicode.com/posts"
 
 
 def fetch_and_print_posts():
-    """
-    Fetches all posts from JSONPlaceholder and prints the titles.
-    """
-    url = "https://jsonplaceholder.typicode.com/posts"
+    response = requests.get(URL)
+    posts = response.json()
+    print(f"Status Code: {response.status_code}")
 
-    try:
-        res = requests.get(url)
-        res.raise_for_status()  # Raise an exception for HTTP errors
-    except requests.RequestException as e:
-        print(f"Failed to retrieve data: {e}")
-        return
+    if response.status_code == 200:
+        posts = response.json()
 
-    print("Status Code: {}".format(res.status_code))
+        for post in posts:
+            print(post.get("title"))
 
-    if res.headers.get("Content-Type") == "application/json; charset=utf-8":
-        json_data = res.json()
-        for post in json_data:
-            print(post["title"])
 
 def fetch_and_save_posts():
-    """
-    Fetches all posts from JSONPlaceholder and saves them in a csv file.
-    """
-    url = "https://jsonplaceholder.typicode.com/posts"
+    response = requests.get(URL)
+    if response.status_code == 200:
+        posts = response.json()
 
-    try:
-        res = requests.get(url)
-    except:
-        print("Failed to retrieve data")
-        return
+        formatted_posts = [
+            {
+                "id": post.get("id"),
+                "title": post.get("title"),
+                "body": post.get("body"),
+            }
+            for post in posts
+        ]
 
-    json_data = res.json()
-
-    csvfile = "posts.csv"
-
-    filtered_data = [{key: post[key] for key in ('id', 'title', 'body')} for post in json_data]
-
-    headers = ['id', 'title', 'body']
-
-    with open(csvfile, "w", newline="") as file:
-        csv_write = csv.DictWriter(file, fieldnames=headers)
-        csv_write.writeheader()
-        csv_write.writerows(filtered_data)
+        with open("posts.csv", mode="w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(
+                file, fieldnames=["id", "title", "body"]
+            )
+            writer.writeheader()
+            writer.writerows(formatted_posts)

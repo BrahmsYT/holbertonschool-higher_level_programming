@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-# 0-square.py
-# Brennan D Baraban <375@holbertonschool.com>
-"""Define a class Square."""
+"""Document this nigga"""
 
 
 class Square:
-    """Represent a square."""
+    """Fuckass class"""
     pass

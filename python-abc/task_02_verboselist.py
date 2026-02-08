@@ -1,25 +1,24 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 class VerboseList(list):
-    def append(self, x):
-        super().append(x)
-        print('Added {} to the list.'.format(x))
+    """VerboseList class"""
+    def append(self, value):
+        super().append(value)
+        print(f"Added [{value}] to the list")
 
-    def extend(self, x):
-        super().extend(x)
-        print('Extended the list with {} items.'.format(len(x)))
+    def extend(self, iterable):
+        count = len(iterable)
+        super().extend(iterable)
+        print(f"Extending the wlist with [{count}] items.")
 
-    def remove(self, x):
-        super().remove(x)
-        print('Removed {} from the list.'.format(x))
+    def remove(self, value):
+        super().remove(value)
+        print(f"Removed [{value}] from the list.")
 
-    def pop(self, x=-1):
-        print('Popped {} from the list.'.format(self[x]))
-        deleted = super().pop(x)
-        return deleted
-
-
-lst = VerboseList()
-lst.append('a')
-lst.extend(['b', 'c', 'd'])
-lst.remove('b')
-lst.pop(1)
+    def pop(self, index=None):
+        if index is None:
+            value = super().pop()
+            print(f"Popped [{value}] from the list.")
+        else:
+            value = super().pop(index)
+            print(f"Popped [{value}] from the list.")
+        return value

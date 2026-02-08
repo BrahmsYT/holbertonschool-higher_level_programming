@@ -1,48 +1,47 @@
 #!/usr/bin/python3
 """
-Python web server
+Docstring for restful-api.task_03_http_server
 """
-import http.server
-import socketserver
+
+from asyncio import run
+import http
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import socketserver
 
-PORT = 8000
+dict_sample = {"name": "John", "age": 30, "city": "New York"}
+json_sample = json.dumps(dict_sample)
 
-class MyHandler(http.server.BaseHTTPRequestHandler):
-    """
-    class for handling server requests
-    """
+
+sub = http.server.SimpleHTTPRequestHandler
+
+class Handler(sub):
     def do_GET(self):
-        if self.path == "/":
+        if self.path == '/':
+            self.send_response(200)  
+            self.send_header("Content-type", 'text/plain') 
+            self.end_headers()  
+            self.wfile.write(b'Hello, this is a simple API!')  
+        elif self.path == '/data':
             self.send_response(200)
-            self.send_header("Content-type", "text/plain")
+            self.send_header('content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(b"Hello, this is a simple API!")
-            
-        elif self.path == "/data":
+            self.wfile.write(json_sample.encode())
+        elif self.path == '/status':
             self.send_response(200)
-            self.send_header("Content-type", "application/json")
+            self.send_header('content-type', 'text/plain')
             self.end_headers()
-            response_data = {
-                "name": "John",
-                "age": 30,
-                "city": "New York"
-            }
-            self.wfile.write(json.dumps(response_data).encode('utf-8'))
-            
-        elif self.path == "/status":
-            self.send_response(200)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"OK")
-            
+            self.wfile.write(b'OK')
         else:
             self.send_response(404)
-            self.send_header("Content-type", "text/plain")
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(b"Endpoint not found")
+            self.wfile.write(b'Endpoint not found')
 
-Handler = MyHandler
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Serving at port {PORT}")
-    httpd.serve_forever()
+
+PORT = 8000
+server = socketserver.TCPServer(('', PORT), Handler)
+server.serve_forever()
+
+if __name__ == "__main__":
+    run()

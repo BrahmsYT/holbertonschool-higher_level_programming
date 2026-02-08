@@ -1,4 +1,4 @@
--- hbtn
+-- meet me at the huzz street 98 battery percentage, Brussells - Somalia 
 CREATE TABLE IF NOT EXISTS second_table (
 	id INT,
 	name VARCHAR(256),

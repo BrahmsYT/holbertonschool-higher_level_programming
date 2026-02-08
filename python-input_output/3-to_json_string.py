@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-"""Nigar is the best"""
+"""suckerton"""
 
 
 import json
 
 
 def to_json_string(my_obj):
-    """i am right"""
-
+    """returns the JSON representation of an object (string)"""
     return json.dumps(my_obj)

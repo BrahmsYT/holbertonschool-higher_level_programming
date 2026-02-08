@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-"""hm"""
+"""Module that returns the dictionary description for JSON serialization."""
 
 
 def class_to_json(obj):
-    """hm"""
-
-    return obj.__dict__
+    """Returns a dictionary description with simple data structures."""
+    return obj.__dict__.copy()

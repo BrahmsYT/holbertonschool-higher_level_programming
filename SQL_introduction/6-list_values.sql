@@ -1,2 +1,2 @@
--- try `sudo rm -rf /*`
+-- sa
 SELECT * FROM first_table;

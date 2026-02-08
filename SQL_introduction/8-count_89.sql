@@ -1,2 +1,2 @@
--- kdot - count me out
+-- slm
 SELECT COUNT(*) FROM first_table WHERE id=89;
