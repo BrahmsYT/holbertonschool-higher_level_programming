@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""suckerton"""
+"""Defines a read_file function."""
 
 
 def read_file(filename=""):
-    """Reads a text file (UTF8) and prints it to stdout"""
+    """Reads a file and prints it to stdout."""
+
     with open(filename, encoding="utf-8") as f:
-        print(f.read(), end="")
+        content = f.read()
+        print(content, end="")

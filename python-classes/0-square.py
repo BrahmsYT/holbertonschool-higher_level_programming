@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Document this nigga"""
+"""This program defines an empty class called Square."""
 
 
 class Square:
-    """Fuckass class"""
+    """Represents a square"""
     pass

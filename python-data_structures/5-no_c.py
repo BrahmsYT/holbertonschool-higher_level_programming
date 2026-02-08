@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-def no_c(mystr):
-    newstr = ""
-    for char in mystr:
-        if char != 'c' and char != 'C':
-            newstr += char
-    return newstr
+def no_c(my_string):
+    new_string = ""
+    for ch in my_string:
+        if ch != 'c' and ch != 'C':
+            new_string += ch
+    return new_string

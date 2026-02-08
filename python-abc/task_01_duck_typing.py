@@ -1,54 +1,62 @@
 #!/usr/bin/env python3
+"""Defines an abstract class Shape."""
 from abc import ABC, abstractmethod
-import math
+from math import pi
 
 
 class Shape(ABC):
-    """Abstract base class for shapes"""
-
+    """Represents an abstract class Shape."""
     @abstractmethod
     def area(self):
+        """Defines an abstract  area method."""
         pass
 
     @abstractmethod
     def perimeter(self):
+        """Defines an abstract  perimeter method."""
         pass
-
 
 class Circle(Shape):
-    """Circle class"""
+    """Represents an abstract class Shape."""
+
     def __init__(self, radius):
-        self.__radius = abs(radius)
+        """Initializes Circle."""
+        self.radius = radius
 
     def area(self):
-        return math.pi * self.__radius ** 2
+        """Implements the area method."""
+        return pi * abs(self.radius) ** 2
 
     def perimeter(self):
-        return 2 * math.pi * self.__radius
-
+        """Implements the perimeter method."""
+        return 2 * pi * abs(self.radius)
 
 class Rectangle(Shape):
-    """Rectangle class"""
+    """Represents an abstract class Shape."""
+
     def __init__(self, width, height):
-        self.__width = width
-        self.__height = height
+        """Initializes Rectangle."""
+        self.width = width
+        self.height = height
 
     def area(self):
-        return self.__width * self.__height
+        """Implements the area method."""
+        return self.width * self.height
 
     def perimeter(self):
-        return 2 * (self.__width + self.__height)
+        """Implements the perimeter method."""
+        return 2 * (self.width + self.height)
 
-
-def shape_info(shape):
-    print("Area:", shape.area())
-    print("Perimeter:", shape.perimeter())
-
+def shape_info(self):
+    """Implements the shape_info method."""
+    print(f"Area: {self.area()}")
+    print(f"Perimeter: {self.perimeter()}")
 
 if __name__ == "__main__":
-
-    circle = Circle(radius=5)
-    rectangle = Rectangle(width=4, height=6)
+    circle = Circle(3)
+    rectangle = Rectangle(4, 5)
 
     shape_info(circle)
     shape_info(rectangle)
+
+

@@ -1,11 +1,9 @@
 #!/usr/bin/python3
+import sys
 
 if __name__ == "__main__":
-    import sys
-    args = sys.argv
-
-    sum = 0
-
-    for i in range(1, len(args)):
-        sum = sum + int(args[i])
-    print(sum)
+    argv = sys.argv[1:]  # Exclude the script name
+    total = 0
+    for arg in argv:
+        total += int(arg)
+    print(total)

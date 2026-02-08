@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
+"""Defines a function to serialize and deserialize Python objects"""
 import json
 
 
-def load_and_deserialize(file_path):
-    with open(file_path, 'r') as file:
+def serialize_and_save_to_file(data, filename):
+    with open(filename, 'w') as file:
+        return json.dump(data, file)
+
+def load_and_deserialize(filename):
+    with open(filename, 'r') as file:
         return json.load(file)
-
-
-def serialize_and_save_to_file(data, file_path):
-    with open(file_path, 'w') as file:
-        json.dump(data, file)

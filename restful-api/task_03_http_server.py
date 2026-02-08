@@ -1,47 +1,47 @@
-#!/usr/bin/python3
-"""
-Docstring for restful-api.task_03_http_server
-"""
-
-from asyncio import run
-import http
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import json
+import http.server
 import socketserver
-
-dict_sample = {"name": "John", "age": 30, "city": "New York"}
-json_sample = json.dumps(dict_sample)
+import json
 
 
-sub = http.server.SimpleHTTPRequestHandler
-
-class Handler(sub):
+class SimpleRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
+        # Use an if/elif structure to ensure only ONE block executes per request
         if self.path == '/':
-            self.send_response(200)  
-            self.send_header("Content-type", 'text/plain') 
-            self.end_headers()  
-            self.wfile.write(b'Hello, this is a simple API!')  
-        elif self.path == '/data':
             self.send_response(200)
-            self.send_header('content-type', 'application/json')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(json_sample.encode())
+            self.wfile.write(b"Hello, this is a simple API!")
+
+        elif self.path == '/data':
+            data = {"name": "John", "age": 30, "city": "New York"}
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            # Ensure the JSON is dumped correctly to a string then encoded
+            self.wfile.write(json.dumps(data).encode('utf-8'))
+
         elif self.path == '/status':
             self.send_response(200)
-            self.send_header('content-type', 'text/plain')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b'OK')
+            self.wfile.write(b"OK")
+
         else:
+            # Manually send 404 to ensure the body content matches test expectations
             self.send_response(404)
-            self.send_header("Content-type", "application/json")
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b'Endpoint not found')
+            self.wfile.write(b"Endpoint not found")
 
-
+# Define the port
 PORT = 8000
-server = socketserver.TCPServer(('', PORT), Handler)
-server.serve_forever()
 
-if __name__ == "__main__":
-    run()
+# Using Allow Reuse Address helps prevent "Address already in use" errors during rapid restarts
+socketserver.TCPServer.allow_reuse_address = True
+
+with socketserver.TCPServer(("", PORT), SimpleRequestHandler) as httpd:
+    print(f"Serving at http://localhost:{PORT}")
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\nServer stopped.")

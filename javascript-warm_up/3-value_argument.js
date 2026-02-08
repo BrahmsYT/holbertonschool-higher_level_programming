@@ -1,9 +1,12 @@
 #!/usr/bin/node
 
-const firstArg = process.argv[2];
+let count = 0;
+process.argv.forEach(() => {
+  count++;
+});
 
-if (firstArg === undefined) {
+if (count === 2 || count < 2) {
   console.log('No argument');
 } else {
-  console.log(firstArg);
+  console.log(process.argv[2]);
 }

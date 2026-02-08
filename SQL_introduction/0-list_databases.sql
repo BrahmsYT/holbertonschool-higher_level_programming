@@ -1,2 +1,2 @@
--- Biggest database in the universe
+-- show the databases
 SHOW DATABASES;
