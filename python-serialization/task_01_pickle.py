@@ -1,10 +1,31 @@
-#!/usr/bin/env python3
-"""Defines a custom Class named CustomObject."""
+#!/usr/bin/python3
+"""
+task_01_pickle.py serialize and deserialize python object
+using pickle module
+"""
 import pickle
 
 
-class CustomObject(object):
-    """Represents a custom class with attributes."""
+class CustomObject:
+    """
+    custom object ...
+
+    __init__ method
+
+    Args:
+        name (str): name of the student
+        age: age of the student
+        is_student: student or not
+
+    Attributes:
+        name (str): name of the student
+        age: age of the student
+        is_student: student or not
+    """
+
+    name = ""
+    age = 0
+    is_student = False
 
     def __init__(self, name, age, is_student):
         self.name = name
@@ -12,30 +33,51 @@ class CustomObject(object):
         self.is_student = is_student
 
     def display(self):
-        """Display the CustomObject attributes."""
-        print("Name: ", self.name)
-        print("Age: ", self.age)
-        print("Is Student: ", self.is_student)
+        """
+        displays the attributes of an instance of this class
+        """
 
+        obj_dict = self.__dict__
+
+        for key, value in obj_dict.items():
+            print(f"{key}: {value}")
 
     def serialize(self, filename):
-        """Serialize the CustomObject instance."""
-        with open(filename, "wb") as f:
-            return pickle.dump(self, f)
+        """
+        serializes the current instance of the class and save it
+        to provided filename
+
+        Args:
+            filename (str): name of the file to save serialized data to
+
+        Returns:
+            None
+        """
+
+        try:
+            with open(filename, "wb") as file:
+                pickle.dump(self, file)
+        except:
+            return None
 
     @classmethod
     def deserialize(cls, filename):
-        """Deserialize the CustomObject instance."""
+        """
+        load and return an instance of the
+        CustomObject from the provided filename
+
+        Args:
+            filename (str): name of the file to load from
+
+        Returns:
+            An instance of the CustomObject
+        """
+
+        data = ""
+
         try:
-            with open(filename, "rb") as f:
-                return pickle.load(f)
-        except FileNotFoundError:
-            print(f"Error: The file '{filename}' was not found.")
-        except (pickle.UnpicklingError, EOFError):
-            print(f"Error: The file '{filename}' is corrupted or empty.")
-        except AttributeError:
-            print(f"Error: The class structure has changed"
-                  f" since this file was saved.")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+            with open(filename, "rb") as file:
+                data = pickle.load(file)
+        except:
             return None
+        return data

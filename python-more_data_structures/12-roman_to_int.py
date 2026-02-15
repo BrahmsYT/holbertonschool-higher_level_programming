@@ -1,24 +1,24 @@
 #!/usr/bin/python3
 def roman_to_int(roman_string):
-    if type(roman_string) is not str or roman_string is None:
+    if not isinstance(roman_string, str) or roman_string is None:
         return 0
 
-    roman = {
-        'I': 1, 'V': 5, 'X': 10,
-        'L': 50, 'C': 100,
-        'D': 500, 'M': 1000
+    roman_map = {
+        'I': 1, 'V': 5, 'X': 10, 'L': 50,
+        'C': 100, 'D': 500, 'M': 1000
     }
 
     total = 0
-    length = len(roman_string)
+    prev = 0
 
-    for i in range(length):
-        current = roman[roman_string[i]]
+    for ch in reversed(roman_string):
+        value = roman_map.get(ch, 0)
 
-        if (i + 1 < length and
-                current < roman[roman_string[i + 1]]):
-            total -= current
+        if value < prev:
+            total -= value
         else:
-            total += current
+            total += value
+
+        prev = value
 
     return total

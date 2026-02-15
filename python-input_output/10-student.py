@@ -1,25 +1,28 @@
 #!/usr/bin/python3
-"""Defines a class Student."""
+'''
+file: 11-student.py
+Classes:
+-> Student
+'''
 
 
 class Student:
-    """Represents a Student class."""
+    ''' Student class '''
 
     def __init__(self, first_name, last_name, age):
-        """Initializes the first_name, last_name and age of the student."""
+        ''' Constructor method '''
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """Retrieves a dictionary representation of a Student instance."""
+        ''' Method that returns directory description with filter '''
 
-        if (isinstance(attrs, list) and
-                all(isinstance(item, str) for item in attrs)):
+        if isinstance(attrs, list) and all(isinstance(attr, str)
+                                           for attr in attrs):
             res = {}
-            for key in attrs:
-                if key in self.__dict__:
-                    res[key] = self.__dict__[key]
+            for i in attrs:
+                if i in self.__dict__:
+                    res[i] = self.__dict__[i]
             return res
-
         return self.__dict__

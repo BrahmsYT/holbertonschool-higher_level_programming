@@ -1,24 +1,40 @@
 #!/usr/bin/env python3
-"""Defines an Animal class."""
+"""Abstract Base Classes (ABCs)"""
 from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
-    """Represents an animal class."""
+    """
+    Animal class, ensuring it inherits from ABC
+    """
 
     @abstractmethod
     def sound(self):
-        """Represents an animal sound."""
+        """
+        return the sound the animal makes.
+        """
         pass
 
+
 class Dog(Animal):
-    """Represents an animal dog."""
+    """
+    inherits from the Animal class
+    """
+
     def sound(self):
-        """Implements dog sound."""
+        """
+        to return the string "Bark"
+        """
         return "Bark"
 
+
 class Cat(Animal):
-    """Represents an animal cat."""
+    """
+    inherits from the Animal class
+    """
+
     def sound(self):
-        """Implements cat sound."""
+        """
+        to return the string "Meow"
+        """
         return "Meow"

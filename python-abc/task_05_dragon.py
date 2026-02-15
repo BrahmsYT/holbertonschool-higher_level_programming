@@ -1,38 +1,38 @@
 #!/usr/bin/env python3
-"""Defines two mixin classes."""
+"""two mixin classes, SwimMixin and FlyMixin"""
 
 
-class SwimMixin(object):
-    """Swims the dragon."""
+class SwimMixin:
+    """
+    with a method swim that print
+    """
 
     def swim(self):
-        """The creature swims!"""
+        """
+        print
+        """
         print("The creature swims!")
 
-class FlyMixin(object):
-    """Flies the dragon."""
+
+class FlyMixin:
+    """
+    with a method fly that print
+    """
 
     def fly(self):
-        """The creature flies!"""
+        """
+        print
+        """
         print("The creature flies!")
 
+
 class Dragon(SwimMixin, FlyMixin):
-    """Represents a Dragon."""
-
-    def fly(self):
-        """The creature flies!"""
-        super().fly()
-
-    def swim(self):
-        """The creature swims!"""
-        super().swim()
+    """
+    inherits from both SwimMixin and FlyMixin
+    """
 
     def roar(self):
-        """The dragon roars!"""
+        """
+        print
+        """
         print("The dragon roars!")
-
-if __name__ == "__main__":
-    draco = Dragon()
-    draco.swim()  # Outputs: The creature swims!
-    draco.fly()  # Outputs: The creature flies!
-    draco.roar()  # Outputs: The dragon roars!

@@ -1,1 +1,1 @@
-SQL_introduction
+sql tasklarim

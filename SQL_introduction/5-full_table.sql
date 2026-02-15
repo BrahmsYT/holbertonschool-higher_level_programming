@@ -1,2 +1,2 @@
--- a script that prints the description of the table
+-- table but for what??!
 SHOW CREATE TABLE first_table;

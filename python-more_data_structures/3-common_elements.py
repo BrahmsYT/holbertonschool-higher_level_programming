@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+
 def common_elements(set_1, set_2):
-    result = set()
-    for elem in set_1:
-        if elem in set_2:
-            result.add(elem)
-    return result
+    common = set()
+
+    for item in set_1:
+        if item in set_2:
+            common.add(item)
+
+    return common
